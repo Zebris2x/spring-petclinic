@@ -71,11 +71,12 @@ class OwnerTest {
 		assertSame(pet1, found);
 		// id not matching returns null
 		assertNull(owner.getPet(999));
-		// new pet with id should be ignored
+		// a pet with an ID, even if just created, is not considered "new" by
+		// the lookup logic, so it should be returned.
 		Pet newPet = new Pet();
 		newPet.setId(3);
 		owner.getPets().add(newPet);
-		assertNull(owner.getPet(3));
+		assertSame(newPet, owner.getPet(3));
 	}
 
 	@Test
